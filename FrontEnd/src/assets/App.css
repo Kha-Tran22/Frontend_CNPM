@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  padding-top: 70px; /* Tăng padding để tránh NavBar che nội dung */
+  padding-top: 70px;
   width: 100%;
   min-height: 100vh;
 }
@@ -28,7 +28,6 @@ body {
   justify-content: center;
 }
 
-/* NavBar */
 /* NavBar */
 .navbar {
   display: flex;
@@ -77,7 +76,7 @@ body {
   padding: 0.5rem 1.5rem;
   border-radius: 5px;
   transition: all 0.3s ease;
-  text-decoration: none; /* Bỏ gạch dưới */
+  text-decoration: none;
 }
 
 .nav-link:hover {
@@ -99,6 +98,9 @@ body {
   width: 100vw;
   background: url('./Background.jpg') no-repeat center center fixed;
   background-size: cover;
+  display: flex; /* Thêm flex để căn giữa */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: center; /* Căn giữa theo chiều ngang */
   padding: 3rem;
 }
 
@@ -108,6 +110,7 @@ body {
   border-radius: 20px;
   max-width: 900px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center; /* Đảm bảo nội dung bên trong cũng căn giữa */
 }
 
 .hero-title {
@@ -440,19 +443,21 @@ body {
 }
 
 /* UserSelection */
-.selection-box {
-  background: rgba(255, 255, 255, 0.9);
+.user-selection-container {
+  background: rgba(255, 255, 255, 0.95);
   padding: 3rem;
   border-radius: 20px;
   max-width: 500px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid #007bff;
 }
 
 .selection-title {
   font-size: 2.5rem;
-  color: #03151f;
+  color: #007bff;
   margin-bottom: 1rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .selection-subtitle {
@@ -489,6 +494,7 @@ body {
 
 .selection-button.guest:hover {
   background: #e0f0ff;
+  border-color: #28a745;
 }
 
 /* Login */
@@ -595,37 +601,74 @@ body {
   flex-wrap: wrap;
 }
 
-.help-box {
-  position: absolute;
-  top: 80px;
-  right: 30px;
-  background: #00aaff;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 10px;
-  font-size: 1.2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.help-box:hover {
-  background: #007bff;
-  transform: scale(1.05);
-}
-
 /* SpaceSelection */
+.space-selection-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 800px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid #007bff;
+}
+
 .space-title {
   font-size: 2.5rem;
-  color: #fff;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  color: #007bff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   margin: 2rem 0;
 }
 
+.space-options {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* SpaceCard */
+.space-card {
+  background: #fff;
+  border: 2px solid #007bff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  width: 200px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.space-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: #28a745;
+}
+
+.space-card .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.space-card .label {
+  font-size: 1.4rem;
+  color: #03151f;
+}
+
 /* SearchSpace */
+.search-space-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid #007bff;
+}
+
 .search-title {
   font-size: 2.5rem;
-  color: #fff;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  color: #007bff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   margin: 2rem 0;
 }
 
@@ -635,9 +678,9 @@ body {
 
 .search-input {
   padding: 1rem;
-  width: 400px;
-  max-width: 100%;
-  border: 2px solid #ccc;
+  width: 100%;
+  max-width: 500px;
+  border: 2px solid #007bff;
   border-radius: 10px;
   font-size: 1.2rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -645,7 +688,7 @@ body {
 }
 
 .search-input:focus {
-  border-color: #00aaff;
+  border-color: #28a745;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   outline: none;
 }
@@ -658,20 +701,55 @@ body {
   margin: 0 auto;
 }
 
+.no-results {
+  font-size: 1.3rem;
+  color: #555;
+  margin-top: 2rem;
+}
+
+/* RoomCard */
+.room-card {
+  background: #fff;
+  border: 2px solid #007bff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: #28a745;
+}
+
+.room-card p {
+  font-size: 1.2rem;
+  color: #03151f;
+  margin: 0.5rem 0;
+}
+
 /* BookingConfirmation */
+.booking-confirmation-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid #007bff;
+}
+
 .booking-title {
   font-size: 2.5rem;
-  color: #fff;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  color: #007bff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   margin: 2rem 0;
 }
 
 .booking-box {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 3rem;
-  border-radius: 20px;
-  max-width: 600px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
 }
 
 .booking-box p {
@@ -685,11 +763,12 @@ body {
   gap: 1.5rem;
   flex-wrap: wrap;
   margin: 2rem 0;
+  justify-content: center;
 }
 
 .feature-btn {
   padding: 0.75rem 1.5rem;
-  border: 2px solid #ccc;
+  border: 2px solid #007bff;
   border-radius: 10px;
   background: #fff;
   font-size: 1.2rem;
@@ -706,6 +785,7 @@ body {
 
 .feature-btn:hover {
   transform: scale(1.05);
+  border-color: #28a745;
 }
 
 .confirm-button {
@@ -723,6 +803,25 @@ body {
 
 .confirm-button:hover {
   background: linear-gradient(45deg, #007bff, #0056b3);
+  transform: scale(1.05);
+}
+
+/* Help Box */
+.help-box {
+  position: absolute;
+  top: 100px; /* Đưa xuống dưới một chút */
+  right: 30px;
+  background: #007bff;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.help-box:hover {
+  background: #28a745;
   transform: scale(1.05);
 }
 

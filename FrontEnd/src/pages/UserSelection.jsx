@@ -6,7 +6,7 @@ const UserSelection = () => {
 
   return (
     <div className="background">
-      <div className="selection-box">
+      <div className="user-selection-container">
         <h2 className="selection-title">Smart Study Space</h2>
         <p className="selection-subtitle">Hệ thống không gian học tập thông minh</p>
         <button className="selection-button" onClick={() => navigate('/login')}>
