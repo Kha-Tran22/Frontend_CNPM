@@ -1,43 +1,34 @@
-import React, { useState } from 'react';
-import './assets/App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
-import RoleSelection from './pages/RoleSelection';
+import UserSelection from './pages/UserSelection';
 import Login from './pages/Login';
 import MainPage from './pages/MainPage';
 import SpaceSelection from './pages/SpaceSelection';
 import SearchSpace from './pages/SearchSpace';
 import BookingConfirmation from './pages/BookingConfirmation';
+import './assets/App.css';
 
 const App = () => {
-  const [page, setPage] = useState('home');
-  const [selectedRoom, setSelectedRoom] = useState(null);
-
   return (
-    <div className="container">
-      <NavBar setPage={setPage} currentPage={page} />
-      <div className="content">
-        {page === 'home' ? (
-          <Home setPage={setPage} />
-        ) : page === 'roleSelection' ? (
-          <RoleSelection setPage={setPage} />
-        ) : page === 'login' ? (
-          <Login setPage={setPage} />
-        ) : page === 'main' ? (
-          <MainPage setPage={setPage} />
-        ) : page === 'space' ? (
-          <SpaceSelection setPage={setPage} />
-        ) : page === 'search' ? (
-          <SearchSpace setPage={setPage} setSelectedRoom={setSelectedRoom} />
-        ) : (
-          <BookingConfirmation
-            setPage={setPage}
-            setPageToSpaceSetting={() => setPage('spaceSetting')}
-            room={selectedRoom}
-          />
-        )}
+    <Router>
+      <div className="container">
+        <NavBar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/user-selection" element={<UserSelection />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/main" element={<MainPage />} />
+            <Route path="/space" element={<SpaceSelection />} />
+            <Route path="/search" element={<SearchSpace />} />
+            <Route path="/booking" element={<BookingConfirmation />} />
+            <Route path="*" element={<div>404 - Trang không tồn tại</div>} /> {/* Route cho lỗi 404 */}
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const BookingConfirmation = ({ setPage, room }) => {
+const BookingConfirmation = () => {
   const [name, setName] = useState('');
   const [mssv, setMssv] = useState('');
   const [currentDate, setCurrentDate] = useState('');
@@ -12,11 +12,13 @@ const BookingConfirmation = ({ setPage, room }) => {
     board: false,
     power: false,
   });
+  const navigate = useNavigate();
+  const location = useLocation();
+  const room = location.state?.room;
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = now.toLocaleDateString('vi-VN');
-    setCurrentDate(formattedDate);
+    setCurrentDate(now.toLocaleDateString('vi-VN'));
   }, []);
 
   const handleConfirm = () => {
@@ -24,26 +26,20 @@ const BookingConfirmation = ({ setPage, room }) => {
       alert('Vui lòng nhập đầy đủ thông tin!');
       return;
     }
-    alert(
-      `Đặt phòng thành công!\nTên: ${name}\nMSSV: ${mssv}\nPhòng: ${room.room}\nNgày: ${currentDate}`
-    );
-    setPage('spaceSetting');
+    alert(`Đặt phòng thành công!\nTên: ${name}\nMSSV: ${mssv}\nPhòng: ${room.room}`);
+    navigate('/space');
   };
 
   const toggleFeature = (feature) => {
-    setSelectedFeatures((prev) => ({
-      ...prev,
-      [feature]: !prev[feature],
-    }));
+    setSelectedFeatures((prev) => ({ ...prev, [feature]: !prev[feature] }));
   };
 
-  if (!room) return <div>Không có phòng nào được chọn!</div>;
+  if (!room) return <div>Không có phòng nào được chọn! Quay lại <button onClick={() => navigate('/search')}>Tìm phòng</button></div>;
 
   return (
     <div className="background">
-      <Header />
-      <h2>Booking confirmation</h2>
-      <div className="confirmation-box">
+      <h2 className="booking-title">Xác nhận đặt phòng</h2>
+      <div className="booking-box">
         <div className="input-group">
           <label>Tên:</label>
           <input
@@ -51,7 +47,6 @@ const BookingConfirmation = ({ setPage, room }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Nhập tên của bạn"
-            required
           />
         </div>
         <div className="input-group">
@@ -61,18 +56,11 @@ const BookingConfirmation = ({ setPage, room }) => {
             value={mssv}
             onChange={(e) => setMssv(e.target.value)}
             placeholder="Nhập MSSV"
-            required
           />
         </div>
-        <p>
-          <strong>Court:</strong> {room.court} | <strong>Floor:</strong> {room.floor} | <strong>Room:</strong> {room.room}
-        </p>
-        <p>
-          <strong>Date:</strong> {currentDate}
-        </p>
-        <p>
-          <strong>Usage time:</strong> 180 phút
-        </p>
+        <p><strong>Court:</strong> {room.court} | <strong>Floor:</strong> {room.floor} | <strong>Room:</strong> {room.room}</p>
+        <p><strong>Ngày:</strong> {currentDate}</p>
+        <p><strong>Thời gian sử dụng:</strong> 180 phút</p>
         <div className="room-features">
           <button
             className={`feature-btn ${selectedFeatures.light ? 'selected' : ''}`}
@@ -99,14 +87,14 @@ const BookingConfirmation = ({ setPage, room }) => {
             <span>📱</span> Board
           </button>
           <button
-            className={`feature-btn power-btn ${selectedFeatures.power ? 'selected' : ''}`}
+            className={`feature-btn ${selectedFeatures.power ? 'selected' : ''}`}
             onClick={() => toggleFeature('power')}
           >
-            <span>⚡</span> Power outlet
+            <span>⚡</span> Power
           </button>
         </div>
         <button className="confirm-button" onClick={handleConfirm}>
-          Confirm
+          Xác nhận
         </button>
       </div>
     </div>

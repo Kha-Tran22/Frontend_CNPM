@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Header from '../components/Header';
 
-const Login = ({ setPage }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setEmail(localStorage.getItem('rememberedEmail') || '');
@@ -19,42 +21,62 @@ const Login = ({ setPage }) => {
         withCredentials: true,
         headers: { 'Content-Type': 'application/json' },
       })
-      .then(() => setPage('main'))
+      .then((response) => {
+        console.log('Login successful:', response.data);
+        if (rememberMe) {
+          localStorage.setItem('rememberedEmail', email);
+          localStorage.setItem('rememberedPassword', password);
+        } else {
+          localStorage.removeItem('rememberedEmail');
+          localStorage.removeItem('rememberedPassword');
+        }
+        navigate('/main');
+      })
       .catch((error) => {
-        console.error('Error:', error);
-        alert('An error occurred during login');
+        console.error('Login error:', error.response || error);
+        alert('Đăng nhập thất bại. Vui lòng kiểm tra email/mật khẩu.');
       });
   };
 
   return (
     <div className="background">
-      <Header />
       <div className="login-box">
-        <h2>Đăng nhập</h2>
+        <h2 className="login-title">Đăng nhập</h2>
         <form onSubmit={handleLogin}>
           <div className="input-group">
             <label>Email</label>
             <input
+              className="login-input"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Nhập email"
               required
             />
           </div>
           <div className="input-group">
             <label>Mật khẩu</label>
             <input
+              className="login-input"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Nhập mật khẩu"
               required
             />
           </div>
           <div className="remember-me">
-            <input type="checkbox" id="remember" />
+            <input
+              type="checkbox"
+              id="remember"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
             <label htmlFor="remember">Nhớ đăng nhập</label>
           </div>
-          <button type="submit">Xác nhận</button>
+          <button className="login-button" type="submit">
+            Xác nhận
+          </button>
         </form>
       </div>
     </div>

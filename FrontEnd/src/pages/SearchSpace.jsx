@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
 import RoomCard from '../components/RoomCard';
 
-const SearchSpace = ({ setPage, setSelectedRoom }) => {
+const SearchSpace = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
   const rooms = [
     { court: 'BK.B1', floor: 1, room: '103' },
     { court: 'BK.B1', floor: 1, room: '104' },
     { court: 'BK.B1', floor: 2, room: '205' },
-    { court: 'BK.B1', floor: 2, room: '206' },
-    { court: 'BK.B1', floor: 3, room: '304' },
-    { court: 'BK.B1', floor: 3, room: '305' },
   ];
 
   const filteredRooms = rooms.filter(
@@ -19,10 +17,13 @@ const SearchSpace = ({ setPage, setSelectedRoom }) => {
       room.room.includes(searchTerm)
   );
 
+  const handleRoomSelect = (room) => {
+    navigate('/booking', { state: { room } });
+  };
+
   return (
     <div className="background">
-      <Header />
-      <h2>Chọn phòng học</h2>
+      <h2 className="search-title">Chọn phòng học</h2>
       <div className="search-container">
         <input
           type="text"
@@ -37,10 +38,7 @@ const SearchSpace = ({ setPage, setSelectedRoom }) => {
           <RoomCard
             key={index}
             room={room}
-            onClick={() => {
-              setSelectedRoom(room);
-              setPage('booking');
-            }}
+            onClick={() => handleRoomSelect(room)}
           />
         ))}
       </div>
