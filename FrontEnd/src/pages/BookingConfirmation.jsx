@@ -41,7 +41,7 @@ const BookingConfirmation = ({ setPage, room }) => {
 
   return (
     <div className="background">
-      <Header backButton onBackClick={() => setPage('search')} />
+      <Header />
       <h2>Booking confirmation</h2>
       <div className="confirmation-box">
         <div className="input-group">
@@ -65,8 +65,7 @@ const BookingConfirmation = ({ setPage, room }) => {
           />
         </div>
         <p>
-          <strong>Court:</strong> {room.court} | <strong>Floor:</strong>{' '}
-          {room.floor} | <strong>Room:</strong> {room.room}
+          <strong>Court:</strong> {room.court} | <strong>Floor:</strong> {room.floor} | <strong>Room:</strong> {room.room}
         </p>
         <p>
           <strong>Date:</strong> {currentDate}
@@ -100,9 +99,7 @@ const BookingConfirmation = ({ setPage, room }) => {
             <span>📱</span> Board
           </button>
           <button
-            className={`feature-btn power-btn ${
-              selectedFeatures.power ? 'selected' : ''
-            }`}
+            className={`feature-btn power-btn ${selectedFeatures.power ? 'selected' : ''}`}
             onClick={() => toggleFeature('power')}
           >
             <span>⚡</span> Power outlet

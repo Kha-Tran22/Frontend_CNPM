@@ -21,7 +21,7 @@ const SearchSpace = ({ setPage, setSelectedRoom }) => {
 
   return (
     <div className="background">
-      <Header backButton onBackClick={() => setPage('space')} />
+      <Header />
       <h2>Chọn phòng học</h2>
       <div className="search-container">
         <input
